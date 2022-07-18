@@ -13,7 +13,7 @@ import Register from "../pages/Register";
 
 const isLoggedIn = true;
 const PrivateRouter = () => {
-  isLoggedIn ? <Outlet /> : <Navigate to="/" />;
+  return isLoggedIn ? <Outlet /> : <Navigate to="/" />;
 };
 
 const Router = () => {
@@ -24,6 +24,7 @@ const Router = () => {
         <Route path="/" element={<Main />} />
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
+        {/* <Route path="moviedetail/:id" element={<MovieDetail />} /> */}
         <Route path="/moviedetail" element={<PrivateRouter />}>
           <Route path="" element={<MovieDetail />} />
         </Route>
