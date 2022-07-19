@@ -1,6 +1,7 @@
 import { useNavigate } from "react-router-dom";
 import { useMovieContext } from "../context/MovieContextProvider";
 import noPhoto from "../assets/noPhoto.jpg";
+import { toast } from "react-hot-toast";
 
 const MovieCard = ({ movie }) => {
   const { setMovieDetail, isLoggedIn } = useMovieContext();
@@ -14,7 +15,7 @@ const MovieCard = ({ movie }) => {
       navigate(`/moviedetail`);
       setMovieDetail(movie);
     } else {
-      alert("Please Login to see the detail page...");
+      toast.error("Please Login to see the detail page...");
     }
   };
   return (
@@ -39,7 +40,7 @@ const MovieCard = ({ movie }) => {
         <h5>{title}</h5>
 
         {isLoggedIn && (
-          <button className="btn btn-warning">vote_average</button>
+          <button className="btn btn-warning">{vote_average}</button>
         )}
       </div>
     </div>

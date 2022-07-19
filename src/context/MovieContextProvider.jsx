@@ -1,4 +1,4 @@
-import { createContext, useContext, useEffect, useState } from "react";
+import { createContext, useContext, useState } from "react";
 import axios from "axios";
 
 //? 1- Defining
@@ -11,7 +11,7 @@ export const useMovieContext = () => {
 
 //? 2- Provider Component
 const MovieContextProvider = ({ children }) => {
-  const [movies, setMovies] = useState([]);
+  const [movies, setMovies] = useState();
   const [isLoggedIn, setIsLoggedIn] = useState();
   const [movieDetail, setMovieDetail] = useState([]);
 
@@ -40,9 +40,10 @@ const MovieContextProvider = ({ children }) => {
     }
   };
 
-  useEffect(() => {
-    getMovies();
-  }, []);
+  // useEffect(() => {
+
+  //   getMovies();
+  // }, []);
 
   const values = {
     movies,

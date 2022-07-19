@@ -1,13 +1,16 @@
 // Add the Firebase Authentication JS codes in your firebase.js file and initialize Firebase Authentication:
 
 import { initializeApp } from "firebase/app";
-import { getAuth } from "firebase/auth";
-import { createUserWithEmailAndPassword } from "firebase/auth";
-import { signInWithEmailAndPassword } from "firebase/auth";
-import { onAuthStateChanged } from "firebase/auth";
-import { signOut } from "firebase/auth";
-import { signInWithPopup } from "firebase/auth";
-import { GoogleAuthProvider } from "firebase/auth";
+import {
+  getAuth,
+  createUserWithEmailAndPassword,
+  signInWithEmailAndPassword,
+  onAuthStateChanged,
+  signOut,
+  signInWithPopup,
+  GoogleAuthProvider,
+} from "firebase/auth";
+import { toast } from "react-hot-toast";
 //import { useMovieContext } from "../context/MovieContextProvider";
 
 //const { isLoggedIn, setIsLoggedIn } = useMovieContext();
@@ -45,7 +48,7 @@ export const createUser = async (email, password, setIsLoggedIn) => {
 
     console.log(user);
   } catch (error) {
-    alert(error);
+    toast.error(error);
     console.log(error);
   }
 };
@@ -68,7 +71,7 @@ export const signIn = async (email, password, setIsLoggedIn) => {
     // console.log(user.userCredential.user);
     // console.log(auth);
   } catch (error) {
-    alert(error);
+    toast.error(error);
     console.log(error);
   }
 };
@@ -104,7 +107,7 @@ export const signInWithGoogle = async (setIsLoggedIn) => {
     setIsLoggedIn(user);
   } catch (error) {
     console.log(error);
-    alert(error);
+    toast.error(error);
   }
 };
 
@@ -124,9 +127,10 @@ export const logOut = async (setIsLoggedIn) => {
   try {
     await signOut(auth);
     setIsLoggedIn(false);
+    toast.success("LOGGED OUT");
   } catch (error) {
     console.log(error);
-    alert(error);
+    toast.error(error);
   }
 };
 // signOut(auth)

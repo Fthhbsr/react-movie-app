@@ -3,16 +3,26 @@ import { signIn, signInWithGoogle } from "../auth/firebase";
 import { useMovieContext } from "../context/MovieContextProvider";
 import { useNavigate } from "react-router-dom";
 import google from "../assets/google.svg";
+import { toast } from "react-hot-toast";
 
 const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  //const [control, setControl] = useState(false);
   const { isLoggedIn, setIsLoggedIn } = useMovieContext();
 
   const navigate = useNavigate();
 
   const loginNavigate = () => {
-    isLoggedIn && navigate("/");
+    if (isLoggedIn) {
+      navigate("/");
+      toast.success("Successfully Logged In!");
+      //setControl(false);
+    }
+    // else if (control) {
+    //   toast.error("Login Failed");
+    //   navigate("/");
+    // }
   };
 
   useEffect(() => {
@@ -22,6 +32,7 @@ const Login = () => {
   const handleLogin = (e) => {
     e.preventDefault();
     signIn(email, password, setIsLoggedIn);
+    //setControl(true);
     setEmail("");
     setPassword("");
     // loginNavigate();
@@ -30,6 +41,7 @@ const Login = () => {
   const handleLoginGoogle = (e) => {
     e.preventDefault();
     signInWithGoogle(setIsLoggedIn);
+    //setControl(true);
     setEmail("");
     setPassword("");
   };

@@ -22,6 +22,7 @@ const Navbar = () => {
             src={iconVendetta}
             className="me-2 mb-2"
             style={{ width: "2rem" }}
+            alt="icon"
           />
           <h2 className="d-inline">Vendetta Movie App</h2>
         </Link>

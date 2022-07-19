@@ -1,11 +1,16 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import MovieCard from "../components/MovieCard";
 import { useMovieContext } from "../context/MovieContextProvider";
+import { toast } from "react-hot-toast";
 
 const Main = () => {
   const [searchMovie, setSearchMovie] = useState("");
-  const { movies, isLoggedIn, searchMovies } = useMovieContext();
-  console.log(movies);
+  const { movies, isLoggedIn, searchMovies, getMovies } = useMovieContext();
+  //console.log(movies);
+
+  useEffect(() => {
+    !movies && getMovies();
+  });
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -13,7 +18,7 @@ const Main = () => {
       searchMovies(searchMovie);
       setSearchMovie("");
     } else {
-      alert("Please Login to Search for the movie...");
+      toast.error("Please Login to Search for the movie...");
     }
   };
 
