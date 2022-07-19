@@ -2,6 +2,15 @@
 
 import { initializeApp } from "firebase/app";
 import { getAuth } from "firebase/auth";
+import { createUserWithEmailAndPassword } from "firebase/auth";
+import { signInWithEmailAndPassword } from "firebase/auth";
+import { onAuthStateChanged } from "firebase/auth";
+import { signOut } from "firebase/auth";
+import { signInWithPopup } from "firebase/auth";
+import { GoogleAuthProvider } from "firebase/auth";
+//import { useMovieContext } from "../context/MovieContextProvider";
+
+//const { isLoggedIn, setIsLoggedIn } = useMovieContext();
 
 // TODO: Replace the following with your app's Firebase project configuration at project settings part
 // See: https://firebase.google.com/docs/web/learn-more#config-object
@@ -18,37 +27,55 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 
 // Initialize Firebase Authentication and get a reference to the service
-const auth = getAuth(app);
+export const auth = getAuth(app);
 
 // Use this method to Sign up new users :
 
-import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
+export const createUser = async (email, password, setIsLoggedIn) => {
+  try {
+    const user = await createUserWithEmailAndPassword(auth, email, password);
+    setIsLoggedIn(user);
 
-createUserWithEmailAndPassword(auth, email, password)
-  .then((userCredential) => {
-    // Signed in
-    const user = userCredential.user;
-  })
-  .catch((error) => {
+    console.log(user);
+  } catch (error) {
+    alert(error);
     console.log(error);
-  });
+  }
+};
+// createUserWithEmailAndPassword(auth, email, password)
+//   .then((userCredential) => {
+//     // Signed in
+//     const user = userCredential.user;
+//   })
+//   .catch((error) => {
+//     console.log(error);
+//   });
 
 //   Use this method to Sign in existing users :
 
-import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
+export const signIn = async (email, password, setIsLoggedIn) => {
+  try {
+    const user = await signInWithEmailAndPassword(auth, email, password);
+    setIsLoggedIn(user);
 
-signInWithEmailAndPassword(auth, email, password)
-  .then((userCredential) => {
-    // Signed in
-    const user = userCredential.user;
-  })
-  .catch((error) => {
+    // console.log(user.userCredential.user);
+    // console.log(auth);
+  } catch (error) {
+    alert(error);
     console.log(error);
-  });
+  }
+};
+
+// signInWithEmailAndPassword(auth, email, password)
+//   .then((userCredential) => {
+//     // Signed in
+//     const user = userCredential.user;
+//   })
+//   .catch((error) => {
+//     console.log(error);
+//   });
 
 //   Use this method to Set an authentication state observer and get user data :
-
-import { getAuth, onAuthStateChanged } from "firebase/auth";
 
 onAuthStateChanged(auth, (user) => {
   if (user) {
@@ -61,28 +88,44 @@ onAuthStateChanged(auth, (user) => {
 
 // Use this method to Authenticate Using Google with Popup :
 
-import { GoogleAuthProvider } from "firebase/auth";
-
 const provider = new GoogleAuthProvider();
 
-signInWithPopup(auth, provider)
-  .then((result) => {
-    // The signed-in user info.
-    const user = result.user;
-  })
-  .catch((error) => {
-    // Handle Errors here.
+export const signInWithGoogle = async (setIsLoggedIn) => {
+  try {
+    const user = await signInWithPopup(auth, provider);
+    console.log(user);
+    setIsLoggedIn(user);
+  } catch (error) {
     console.log(error);
-  });
+    alert(error);
+  }
+};
+
+// signInWithPopup(auth, provider)
+//   .then((result) => {
+//     // The signed-in user info.
+//     const user = result.user;
+//     console.log(user);
+//   })
+//   .catch((error) => {
+//     // Handle Errors here.
+//     console.log(error);
+//   });
 
 //   Use this method to Sign Out :
-
-import { getAuth, signOut } from "firebase/auth";
-
-signOut(auth)
-  .then(() => {
-    // Sign-out successful.
-  })
-  .catch((error) => {
-    // An error happened.
-  });
+export const logOut = async (setIsLoggedIn) => {
+  try {
+    await signOut(auth);
+    setIsLoggedIn(false);
+  } catch (error) {
+    console.log(error);
+    alert(error);
+  }
+};
+// signOut(auth)
+//   .then(() => {
+//     // Sign-out successful.
+//   })
+//   .catch((error) => {
+//     // An error happened.
+//   });

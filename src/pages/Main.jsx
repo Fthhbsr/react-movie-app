@@ -1,19 +1,36 @@
+import { useState } from "react";
 import MovieCard from "../components/MovieCard";
 import { useMovieContext } from "../context/MovieContextProvider";
 
 const Main = () => {
-  const { movies } = useMovieContext();
+  const [searchMovie, setSearchMovie] = useState("");
+  const { movies, isLoggedIn, searchMovies } = useMovieContext();
   console.log(movies);
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    if (isLoggedIn) {
+      searchMovies(searchMovie);
+    } else {
+      alert("Please Login to Search for the movie...");
+    }
+  };
 
   return (
     <div>
       <div className=" container ">
-        <form className="row p-4 justify-content-center">
+        <form
+          className="row p-4 justify-content-center"
+          onSubmit={(e) => handleSubmit(e)}
+        >
           <div className=" col-auto">
             <input
               type="text"
               placeholder="Search"
               className="form-control rounded"
+              value={searchMovie}
+              onChange={(e) => setSearchMovie(e.target.value)}
+              required
             />
           </div>
           <div className="col-auto">
