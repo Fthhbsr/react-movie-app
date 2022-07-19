@@ -1,21 +1,66 @@
+@import url("https://fonts.googleapis.com/css2?family=Righteous&display=swap");
+
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+  font-family: "Righteous", cursive;
+}
+body {
+  background-color: rgba(0, 0, 0, 0.2);
+}
+
+.main-container {
+  background: url(./assets/filmstrip-grey.png);
+  /* background-color: rgba(0, 0, 0, 0.2); */
+  width: 97.5vw;
+  background-repeat: repeat-y;
+  /* background-size: contain; */
+  background-origin: content-box;
+
+  /* opacity: 0.5; */
+}
+
+.movie-card {
+  cursor: pointer;
+  background-color: cornsilk;
 }
 
 .movie {
   position: relative;
+  overflow: hidden;
+}
+
+.movie:hover .overview {
+  transform: translateX(0%);
 }
 
 .overview {
-  background-color: rgba(0, 0, 0, 0.7);
+  background-color: rgba(0, 0, 0, 0.8);
   color: aliceblue;
   position: absolute;
+  left: 0;
   bottom: 0;
   padding: 1rem;
+  transform: translateX(100%);
+  /* z-index: 1; */
+  overflow: hidden;
+  transition: transform 0.7s ease-in-out;
 }
 
 .card-text {
   text-align: justify;
+}
+.movie-cards-body {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.detail-card-body {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
 }

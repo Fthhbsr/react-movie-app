@@ -11,16 +11,17 @@ const Main = () => {
     e.preventDefault();
     if (isLoggedIn) {
       searchMovies(searchMovie);
+      setSearchMovie("");
     } else {
       alert("Please Login to Search for the movie...");
     }
   };
 
   return (
-    <div>
-      <div className=" container ">
+    <div className="main-container">
+      <div className="container w-50">
         <form
-          className="row p-4 justify-content-center"
+          className="row p-3 my-2 justify-content-center bg-secondary rounded"
           onSubmit={(e) => handleSubmit(e)}
         >
           <div className=" col-auto">
@@ -34,7 +35,10 @@ const Main = () => {
             />
           </div>
           <div className="col-auto">
-            <button type="submit" className="btn btn-primary ms-2 col-auto">
+            <button
+              type="submit"
+              className="btn btn-warning text-dark col-auto"
+            >
               Search a movie...
             </button>
           </div>

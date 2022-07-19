@@ -15,8 +15,8 @@ const MovieContextProvider = ({ children }) => {
   const [isLoggedIn, setIsLoggedIn] = useState();
   const [movieDetail, setMovieDetail] = useState([]);
 
-  // const API_KEY = process.env.REACT_APP_API_KEY;
-  const API_KEY = "5ef3e0346140c3030165961c9a1dad82";
+  const API_KEY = process.env.REACT_APP_API_KEY;
+
   const url = `https://api.themoviedb.org/3/discover/movie?api_key=${API_KEY}`;
   const searchUrl = `https://api.themoviedb.org/3/search/movie?api_key=${API_KEY}&query=`;
 

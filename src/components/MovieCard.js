@@ -1,13 +1,14 @@
-import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useMovieContext } from "../context/MovieContextProvider";
+import noPhoto from "../assets/noPhoto.jpg";
 
 const MovieCard = ({ movie }) => {
   const { setMovieDetail, isLoggedIn } = useMovieContext();
-  const { title, poster_path, overview } = movie;
+  const { title, poster_path, overview, vote_average } = movie;
   const navigate = useNavigate();
-  const [show, setShow] = useState(false);
-  const imgUrl = "https://image.tmdb.org/t/p/w500";
+
+  let imgUrl = `https://image.tmdb.org/t/p/w500${poster_path}`;
+
   const handleClick = () => {
     if (isLoggedIn) {
       navigate(`/moviedetail`);
@@ -18,27 +19,28 @@ const MovieCard = ({ movie }) => {
   };
   return (
     <div
-      className="card col-sm-6 col-md-4 col-lg-3  movie"
-      onMouseOver={() => setShow(true)}
-      onMouseLeave={() => setShow(false)}
+      className="card col-sm-6 col-md-4 col-lg-3 movie-card"
       onClick={() => handleClick()}
     >
-      <div>
+      <div className="movie">
         <img
-          src={`${imgUrl}${poster_path}`}
+          src={poster_path ? imgUrl : noPhoto}
           className="card-img-top rounded"
           alt={title}
         />
-        {show && (
-          <div className="overview me-3 rounded ">
-            <h5 className="card-title">Overview</h5>
-            <p className="card-text">{overview}</p>
-          </div>
-        )}
+
+        <div className="overview  rounded ">
+          <h5 className="card-title">Overview</h5>
+          <p className="card-text">{overview}</p>
+        </div>
       </div>
 
-      <div className="card-body row align-items-center justify-content-between">
-        <h5 className="card-title">{title}</h5>
+      <div className="card-body movie-cards-body">
+        <h5>{title}</h5>
+
+        {isLoggedIn && (
+          <button className="btn btn-warning">vote_average</button>
+        )}
       </div>
     </div>
   );

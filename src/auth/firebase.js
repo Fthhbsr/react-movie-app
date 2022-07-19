@@ -15,12 +15,19 @@ import { GoogleAuthProvider } from "firebase/auth";
 // TODO: Replace the following with your app's Firebase project configuration at project settings part
 // See: https://firebase.google.com/docs/web/learn-more#config-object
 const firebaseConfig = {
-  apiKey: "AIzaSyCDZ01XeIhRqNgnCYLe6yiHMGHGMMnsG1o",
-  authDomain: "react-movie-app-e2f7b.firebaseapp.com",
-  projectId: "react-movie-app-e2f7b",
-  storageBucket: "react-movie-app-e2f7b.appspot.com",
-  messagingSenderId: "392799554417",
-  appId: "1:392799554417:web:11e565bac96f484603c4d0",
+  // apiKey: "AIzaSyCDZ01XeIhRqNgnCYLe6yiHMGHGMMnsG1o",
+  // authDomain: "react-movie-app-e2f7b.firebaseapp.com",
+  // projectId: "react-movie-app-e2f7b",
+  // storageBucket: "react-movie-app-e2f7b.appspot.com",
+  // messagingSenderId: "392799554417",
+  // appId: "1:392799554417:web:11e565bac96f484603c4d0",
+
+  apiKey: process.env.REACT_APP_FIREBASE_API_KEY,
+  authDomain: process.env.REACT_APP_FIREBASE_AUTH_DOMAIN,
+  projectId: process.env.REACT_APP_FIREBASE_PROJECT_ID,
+  storageBucket: process.env.REACT_APP_FIREBASE_STORAGE_BUCKET,
+  messagingSenderId: process.env.REACT_APP_FIREBASE_MESSAGING_SENDER_ID,
+  appId: process.env.REACT_APP_FIREBASE_APP_ID,
 };
 
 // Initialize Firebase

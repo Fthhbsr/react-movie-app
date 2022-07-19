@@ -7,15 +7,16 @@ const Register = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const { isLoggedIn, setIsLoggedIn } = useMovieContext();
-  const navigate = useNavigate();
 
-  useEffect(() => {
-    loginNavigate();
-  }, [isLoggedIn]);
+  const navigate = useNavigate();
 
   const loginNavigate = () => {
     isLoggedIn && navigate("/");
   };
+
+  useEffect(() => {
+    loginNavigate();
+  });
 
   const handleClick = (e) => {
     e.preventDefault();

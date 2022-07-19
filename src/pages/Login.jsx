@@ -2,20 +2,22 @@ import { useEffect, useState } from "react";
 import { signIn, signInWithGoogle } from "../auth/firebase";
 import { useMovieContext } from "../context/MovieContextProvider";
 import { useNavigate } from "react-router-dom";
+import google from "../assets/google.svg";
 
 const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const { isLoggedIn, setIsLoggedIn } = useMovieContext();
-  const navigate = useNavigate();
 
-  useEffect(() => {
-    loginNavigate();
-  }, [isLoggedIn]);
+  const navigate = useNavigate();
 
   const loginNavigate = () => {
     isLoggedIn && navigate("/");
   };
+
+  useEffect(() => {
+    loginNavigate();
+  });
 
   const handleLogin = (e) => {
     e.preventDefault();
@@ -76,6 +78,14 @@ const Login = () => {
             className="btn btn-primary w-100"
             onClick={(e) => handleLoginGoogle(e)}
           >
+            <img
+              style={{
+                width: "1.5rem",
+                marginRight: "1rem",
+              }}
+              src={google}
+              alt="google-icon"
+            />
             CONTINUE WITH GOOGLE
           </button>
         </div>

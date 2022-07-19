@@ -1,24 +1,34 @@
 import { Link } from "react-router-dom";
 import { logOut } from "../auth/firebase";
 import { useMovieContext } from "../context/MovieContextProvider";
+import iconVendetta from "../assets/iconVendetta.svg";
 
 const Navbar = () => {
-  const { isLoggedIn, setIsLoggedIn } = useMovieContext();
+  const { isLoggedIn, setIsLoggedIn, getMovies } = useMovieContext();
 
   const handleLogOut = () => {
     logOut(setIsLoggedIn);
   };
 
   return (
-    <nav className="navbar navbar-dark bg-primary">
-      <div className="container-fluid">
-        <Link className="navbar-brand" to="/">
-          React Movie App
+    <nav className="container navbar navbar-dark bg-warning rounded p-2 mt-1">
+      <div className="container p-2">
+        <Link
+          className="navbar-brand text-dark column justify-content-center"
+          onClick={() => getMovies()}
+          to="/"
+        >
+          <img
+            src={iconVendetta}
+            className="me-2 mb-2"
+            style={{ width: "2rem" }}
+          />
+          <h2 className="d-inline">Vendetta Movie App</h2>
         </Link>
         {isLoggedIn ? (
           <ul className="nav nav-pills">
             <li className="nav-item">
-              <h5 className="pt-1 me-2">Hoşgeldin</h5>
+              <h5 className="pt-1 me-2">Welcome to Movie App</h5>
             </li>
             <li className="nav-item">
               <Link
