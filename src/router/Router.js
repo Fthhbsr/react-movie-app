@@ -14,8 +14,8 @@ import Register from "../pages/Register";
 
 const PrivateRouter = () => {
   const { currentUser } = useMovieContext();
-  //const currentUser = true;
-  return currentUser ? <Outlet /> : <Navigate to="/" />;
+
+  return currentUser ? <Outlet /> : <Navigate to="/login" replace />;
 };
 
 const Router = () => {

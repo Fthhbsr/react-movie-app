@@ -17,6 +17,7 @@ const MovieCard = ({ movie }) => {
       console.log(currentUser);
     } else {
       toast.error("Please Login to see the detail page...");
+      navigate("/login");
     }
   };
   return (
