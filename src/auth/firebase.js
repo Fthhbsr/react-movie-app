@@ -39,7 +39,7 @@ export const createUser = async (email, password, navigate) => {
     navigate("/");
     console.log(user);
   } catch (error) {
-    // toast.error(error);
+    toast.error(error.message);
     console.log(error);
     navigate("/register");
   }
@@ -68,8 +68,9 @@ export const signIn = async (email, password, navigate) => {
     navigate("/");
     // console.log(user.userCredential.user);
     console.log(user);
-  } catch (err) {
-    console.log(err);
+  } catch (error) {
+    toast.error(error.message);
+    console.log(error);
     navigate("/login");
   }
 };
@@ -111,7 +112,7 @@ export const signInWithGoogle = async (navigate) => {
     navigate("/");
   } catch (error) {
     console.log(error);
-    toast.error(error);
+    toast.error(error.message);
   }
   console.log(auth);
 };
@@ -135,7 +136,7 @@ export const logOut = async (setIsLoggedIn) => {
     toast.success(" Succesfully Logged Out");
   } catch (error) {
     console.log(error);
-    toast.error(error);
+    toast.error(error.message);
   }
 };
 // signOut(auth)

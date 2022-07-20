@@ -15,6 +15,7 @@ body {
   /* background-color: rgba(0, 0, 0, 0.2); */
   width: 97.5vw;
   background-repeat: repeat-y;
+  background-position-x: center;
   /* background-size: contain; */
   background-origin: content-box;
 

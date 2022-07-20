@@ -23,7 +23,7 @@ const Login = () => {
     signInWithGoogle(navigate);
 
     // setEmail("");
-    // setPassword("");
+    setPassword("");
   };
 
   return (
@@ -39,6 +39,7 @@ const Login = () => {
             className="form-control"
             id="floatingInput"
             placeholder="name@example.com"
+            required
             // value={email}
             onChange={(e) => setEmail(e.target.value)}
           />
@@ -50,6 +51,7 @@ const Login = () => {
             className="form-control"
             id="floatingPassword"
             placeholder="Password"
+            required
             // value={password}
             onChange={(e) => setPassword(e.target.value)}
           />

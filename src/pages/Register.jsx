@@ -30,6 +30,7 @@ const Register = () => {
             placeholder="name@example.com"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
+            required
           />
           <label htmlFor="floatingInput">Email</label>
         </div>
@@ -41,6 +42,7 @@ const Register = () => {
             placeholder="Password"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
+            required
           />
           <label htmlFor="floatingPassword">Password</label>
         </div>
