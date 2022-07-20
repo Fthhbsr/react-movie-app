@@ -4,10 +4,10 @@ import { useMovieContext } from "../context/MovieContextProvider";
 import iconVendetta from "../assets/iconVendetta.svg";
 
 const Navbar = () => {
-  const { isLoggedIn, setIsLoggedIn, getMovies } = useMovieContext();
+  const { currentUser, setCurrentUser } = useMovieContext();
 
   const handleLogOut = () => {
-    logOut(setIsLoggedIn);
+    logOut(setCurrentUser);
   };
 
   return (
@@ -15,7 +15,7 @@ const Navbar = () => {
       <div className="container p-2">
         <Link
           className="navbar-brand text-dark column justify-content-center"
-          onClick={() => getMovies()}
+          // onClick={() => getMovies()}
           to="/"
         >
           <img
@@ -26,10 +26,12 @@ const Navbar = () => {
           />
           <h2 className="d-inline">Vendetta Movie App</h2>
         </Link>
-        {isLoggedIn ? (
+        {currentUser ? (
           <ul className="nav nav-pills">
             <li className="nav-item">
-              <h5 className="pt-1 me-2">Welcome to Movie App</h5>
+              <h5 className="pt-1 me-2">
+                Welcome to Movie App {currentUser.displayName}
+              </h5>
             </li>
             <li className="nav-item">
               <Link

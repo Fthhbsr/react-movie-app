@@ -1,49 +1,29 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { signIn, signInWithGoogle } from "../auth/firebase";
-import { useMovieContext } from "../context/MovieContextProvider";
 import { useNavigate } from "react-router-dom";
 import google from "../assets/google.svg";
-import { toast } from "react-hot-toast";
+//import { toast } from "react-hot-toast";
 
 const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  //const [control, setControl] = useState(false);
-  const { isLoggedIn, setIsLoggedIn } = useMovieContext();
 
   const navigate = useNavigate();
 
-  const loginNavigate = () => {
-    if (isLoggedIn) {
-      navigate("/");
-      toast.success("Successfully Logged In!");
-      //setControl(false);
-    }
-    // else if (control) {
-    //   toast.error("Login Failed");
-    //   navigate("/");
-    // }
-  };
-
-  useEffect(() => {
-    loginNavigate();
-  });
-
   const handleLogin = (e) => {
     e.preventDefault();
-    signIn(email, password, setIsLoggedIn);
-    //setControl(true);
-    setEmail("");
-    setPassword("");
-    // loginNavigate();
+    signIn(email, password, navigate);
+
+    // setEmail("");
+    // setPassword("");
   };
 
   const handleLoginGoogle = (e) => {
     e.preventDefault();
-    signInWithGoogle(setIsLoggedIn);
-    //setControl(true);
-    setEmail("");
-    setPassword("");
+    signInWithGoogle(navigate);
+
+    // setEmail("");
+    // setPassword("");
   };
 
   return (
@@ -59,7 +39,7 @@ const Login = () => {
             className="form-control"
             id="floatingInput"
             placeholder="name@example.com"
-            value={email}
+            // value={email}
             onChange={(e) => setEmail(e.target.value)}
           />
           <label htmlFor="floatingInput">Email address</label>
@@ -70,7 +50,7 @@ const Login = () => {
             className="form-control"
             id="floatingPassword"
             placeholder="Password"
-            value={password}
+            // value={password}
             onChange={(e) => setPassword(e.target.value)}
           />
           <label htmlFor="floatingPassword">Password</label>

@@ -6,7 +6,7 @@ import Router from "./router/Router";
 function App() {
   return (
     <MovieContextProvider>
-      <Toaster position="top-right" reverseOrder={true} />
+      <Toaster position="top-center" reverseOrder={true} />
       <Router />
     </MovieContextProvider>
   );

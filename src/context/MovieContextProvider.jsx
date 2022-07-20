@@ -1,5 +1,5 @@
-import { createContext, useContext, useState } from "react";
-import axios from "axios";
+import { createContext, useContext, useEffect, useState } from "react";
+import { userInfoChanged } from "../auth/firebase";
 
 //? 1- Defining
 export const MovieContext = createContext();
@@ -11,48 +11,18 @@ export const useMovieContext = () => {
 
 //? 2- Provider Component
 const MovieContextProvider = ({ children }) => {
-  const [movies, setMovies] = useState();
-  const [isLoggedIn, setIsLoggedIn] = useState();
-  const [movieDetail, setMovieDetail] = useState([]);
+  const [currentUser, setCurrentUser] = useState(false);
+  const [movieDetails, setMovieDetails] = useState([]);
 
-  const API_KEY = process.env.REACT_APP_API_KEY;
-
-  const url = `https://api.themoviedb.org/3/discover/movie?api_key=${API_KEY}`;
-  const searchUrl = `https://api.themoviedb.org/3/search/movie?api_key=${API_KEY}&query=`;
-
-  const getMovies = async () => {
-    try {
-      const { data } = await axios.get(url);
-      setMovies(data.results);
-      console.log(data);
-    } catch (error) {
-      console.log(error);
-    }
-  };
-
-  const searchMovies = async (searchMovie) => {
-    try {
-      const { data } = await axios.get(`${searchUrl}${searchMovie}`);
-      setMovies(data.results);
-      console.log(data);
-    } catch (error) {
-      console.log(error);
-    }
-  };
-
-  // useEffect(() => {
-
-  //   getMovies();
-  // }, []);
+  useEffect(() => {
+    userInfoChanged(setCurrentUser);
+  }, []);
 
   const values = {
-    movies,
-    isLoggedIn,
-    setIsLoggedIn,
-    movieDetail,
-    setMovieDetail,
-    getMovies,
-    searchMovies,
+    currentUser,
+    setCurrentUser,
+    movieDetails,
+    setMovieDetails,
   };
 
   return (

@@ -1,26 +1,16 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { createUser } from "../auth/firebase";
-import { useMovieContext } from "../context/MovieContextProvider";
 import { useNavigate } from "react-router-dom";
 
 const Register = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const { isLoggedIn, setIsLoggedIn } = useMovieContext();
 
   const navigate = useNavigate();
 
-  const loginNavigate = () => {
-    isLoggedIn && navigate("/");
-  };
-
-  useEffect(() => {
-    loginNavigate();
-  });
-
   const handleClick = (e) => {
     e.preventDefault();
-    createUser(email, password, setIsLoggedIn);
+    createUser(email, password, navigate);
     setEmail("");
     setPassword("");
   };

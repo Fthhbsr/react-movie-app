@@ -6,14 +6,16 @@ import {
   Outlet,
 } from "react-router-dom";
 import Navbar from "../components/Navbar";
+import { useMovieContext } from "../context/MovieContextProvider";
 import Login from "../pages/Login";
 import Main from "../pages/Main";
 import MovieDetail from "../pages/MovieDetail";
 import Register from "../pages/Register";
 
-const isLoggedIn = true;
 const PrivateRouter = () => {
-  return isLoggedIn ? <Outlet /> : <Navigate to="/" />;
+  const { currentUser } = useMovieContext();
+  //const currentUser = true;
+  return currentUser ? <Outlet /> : <Navigate to="/" />;
 };
 
 const Router = () => {

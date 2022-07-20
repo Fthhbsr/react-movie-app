@@ -4,16 +4,17 @@ import noPhoto from "../assets/noPhoto.jpg";
 import { toast } from "react-hot-toast";
 
 const MovieCard = ({ movie }) => {
-  const { setMovieDetail, isLoggedIn } = useMovieContext();
+  const { setMovieDetails, currentUser } = useMovieContext();
   const { title, poster_path, overview, vote_average } = movie;
   const navigate = useNavigate();
 
   let imgUrl = `https://image.tmdb.org/t/p/w500${poster_path}`;
 
   const handleClick = () => {
-    if (isLoggedIn) {
+    if (currentUser) {
       navigate(`/moviedetail`);
-      setMovieDetail(movie);
+      setMovieDetails(movie);
+      console.log(currentUser);
     } else {
       toast.error("Please Login to see the detail page...");
     }
@@ -39,7 +40,7 @@ const MovieCard = ({ movie }) => {
       <div className="card-body movie-cards-body">
         <h5>{title}</h5>
 
-        {isLoggedIn && (
+        {currentUser && (
           <button className="btn btn-warning">{vote_average}</button>
         )}
       </div>

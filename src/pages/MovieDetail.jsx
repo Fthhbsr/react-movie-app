@@ -3,10 +3,10 @@ import { useMovieContext } from "../context/MovieContextProvider";
 import noPhoto from "../assets/noPhoto.jpg";
 
 const MovieDetail = () => {
-  const { movieDetail } = useMovieContext();
+  const { movieDetails } = useMovieContext();
   const navigate = useNavigate();
 
-  const { title, poster_path, overview, vote_average } = movieDetail;
+  const { title, poster_path, overview, vote_average } = movieDetails;
   let imgUrl = `https://image.tmdb.org/t/p/w500${poster_path}`;
 
   return (

@@ -2,19 +2,47 @@ import { useState, useEffect } from "react";
 import MovieCard from "../components/MovieCard";
 import { useMovieContext } from "../context/MovieContextProvider";
 import { toast } from "react-hot-toast";
+import axios from "axios";
 
 const Main = () => {
   const [searchMovie, setSearchMovie] = useState("");
-  const { movies, isLoggedIn, searchMovies, getMovies } = useMovieContext();
+  const [movies, setMovies] = useState([]);
+  const [control, setControl] = useState(true);
+  const { currentUser } = useMovieContext();
+  const API_KEY = process.env.REACT_APP_API_KEY;
+  const url = `https://api.themoviedb.org/3/discover/movie?api_key=${API_KEY}`;
+  const searchUrl = `https://api.themoviedb.org/3/search/movie?api_key=${API_KEY}&query=`;
   //console.log(movies);
 
   useEffect(() => {
-    !movies && getMovies();
+    !movies[0] && getMovies();
   });
+
+  const getMovies = async () => {
+    try {
+      const { data } = await axios.get(url);
+      setMovies(data.results);
+      setControl(!control);
+      console.log(data);
+      console.log(currentUser);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const searchMovies = async (searchMovie) => {
+    try {
+      const { data } = await axios.get(`${searchUrl}${searchMovie}`);
+      setMovies(data.results);
+      console.log(data);
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    if (isLoggedIn) {
+    if (currentUser) {
       searchMovies(searchMovie);
       setSearchMovie("");
     } else {
